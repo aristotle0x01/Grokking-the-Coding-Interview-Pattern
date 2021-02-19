@@ -14,3 +14,26 @@ Example 3:
 Input: [1, 5, 6, 4, 3, 2]
 Output: [1, 2, 3, 4, 5, 6]
 '''
+
+
+def cyclic_sort(nums):
+    i = 0
+    while i < len(nums):
+        # 每个元素各归其位，否则循环，直到归位
+        # 如此time complexity of the above algorithm is O(n)
+        j = nums[i] - 1
+        if nums[i] != nums[j]:
+            nums[i], nums[j] = nums[j], nums[i]
+        else:
+            i = i + 1
+
+    return nums
+
+
+def main():
+    print(cyclic_sort([3, 1, 5, 4, 2]))
+    print(cyclic_sort([2, 6, 4, 3, 1, 5]))
+    print(cyclic_sort([1, 5, 6, 4, 3, 2]))
+
+
+main()
