@@ -14,3 +14,58 @@
     Output: [[1,6]]
     Explanation: Since all the given intervals overlap, we merged them into one.
 */
+
+public List<Integer[]> mergeInterval(List<Integer[]> array){
+            List<Integer[]> list = new ArrayList<>();
+
+            // my comparator
+            Comparator<Integer[]> comparator = new Comparator<Integer[]>() {
+                @Override
+                public int compare(Integer[] o1, Integer[] o2) {
+                    int c = o1[0].compareTo(o2[0]);
+                    if(c == 0){
+                        return o1[1].compareTo(o2[1]);
+                    }
+                    return c;
+                }
+            };
+
+            // sort array by first element of each sub array
+            Collections.sort(array, comparator);
+
+            // merge
+            while (!array.isEmpty()){
+                Integer[] e0 = array.get(0);
+                int m01 = e0[0];
+                int m02 = e0[1];
+
+                int i = 1;
+                for(; i<array.size(); i++){
+                    Integer[] ei = array.get(i);
+                    int mi1 = ei[0];
+                    int mi2 = ei[1];
+
+                    if(m02 < mi1){
+                        // found interval
+                        break;
+                    }else{
+                        // found intersection
+                        if(m02 < mi2){
+                            m02 = mi2;
+                        }
+                    }
+                }
+
+                Integer[] t = new Integer[2];
+                t[0] = m01;
+                t[1] = m02;
+                list.add(t);
+
+                while (i > 0){
+                    array.remove(0);
+                    i--;
+                }
+            }
+
+            return list;
+        }
