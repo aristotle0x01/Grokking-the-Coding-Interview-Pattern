@@ -21,6 +21,8 @@ def find_all_missing_number(array):
     while index < n:
         i = array[index] - 1
         if array[index] != (index + 1):
+            # 存在冗余，跳出死循环，此时下标index元素没有交换位置
+            # 但是迟早会被该在那个位置上的元素交换，除非那个位置上的元素缺失
             if array[i] == array[index]:
                 index = index + 1
                 continue
