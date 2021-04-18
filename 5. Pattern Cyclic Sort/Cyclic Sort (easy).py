@@ -15,6 +15,18 @@ Input: [1, 5, 6, 4, 3, 2]
 Output: [1, 2, 3, 4, 5, 6]
 '''
 
+def cyclic_sort(array):
+    index = 0
+    n = len(array) - 1
+
+    while index < n:
+        i = array[index] - 1
+        if array[index] != (index + 1):
+            array[i], array[index] = array[index], array[i]
+        else:
+            index = index + 1
+
+    return  array
 
 def cyclic_sort(nums):
     i = 0
