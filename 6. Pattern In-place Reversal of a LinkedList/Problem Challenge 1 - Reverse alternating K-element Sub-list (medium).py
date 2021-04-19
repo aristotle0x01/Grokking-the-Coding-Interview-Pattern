@@ -25,6 +25,50 @@ class Node:
 
 
 def reverse_alternate_k_sublist(head, k):
+    previous, current = None, head
+    last_part_tail = None
+
+    while True:
+        # reverse part
+        loop = 0
+        temp_head = None
+        while current is not None and loop < k:
+            if loop == 0:
+                temp_head = current
+            temp = current.next
+            current.next = previous
+            previous = current
+            current = temp
+            loop += 1
+
+        # join prev part
+        if last_part_tail is None:
+            head.next = current
+            head = previous
+        else:
+            last_part_tail.next = previous
+
+        # join next part
+        temp_head.next = current
+
+        if current is None:
+            break
+
+        loop = 0
+        while current is not None and loop < k:
+            previous = current
+            current = current.next
+            last_part_tail = previous
+
+            loop += 1
+
+        if current is None:
+            break
+
+    return head
+
+
+def reverse_alternate_k_sublist2(head, k):
     loop = 0
     k_loop_count = 0
     p = head
@@ -89,7 +133,7 @@ def main():
   head.next.next.next.next = Node(5)
   head.next.next.next.next.next = Node(6)
   head.next.next.next.next.next.next = Node(7)
-  #head.next.next.next.next.next.next.next = Node(8)
+  head.next.next.next.next.next.next.next = Node(8)
 
   print("Nodes of original LinkedList are: ", end='')
   head.print_list()
