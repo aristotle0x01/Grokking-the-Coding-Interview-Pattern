@@ -26,6 +26,9 @@ local max including root of this subtree
 up one level, for the parent of this subtree, let's do the math for its left and right subtree,
 with root.val, calc its local max, and local max with parent root
 
+after calc, each subtree can be viewed as a single node with its value as local max including root
+imagine the tree collapsed
+
 and finally we will get to the root of tree
 '''
 
